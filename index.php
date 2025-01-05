@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     $conn = mysqli_connect('localhost', 'root', '', 'sms');
     $sql = "SELECT * FROM students";
     $result = mysqli_query($conn, $sql);
@@ -31,6 +33,15 @@
                 <h2>Student List</h2>
                 <div class="d-grid d-md-flex justify-content-md-end">
                     <a href="insert.php" class="btn btn-success mb-2">Add New</a>
+                </div>
+
+                <!-- session message -->
+                <div class="col-md-12">
+                    <?php if(isset($_SESSION['success'])){ ?>
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> Data Inserted Successfully!
+                    </div>
+                    <?php } ?>
                 </div>
 
                 <table class="table table-bordered table-success table-striped">
@@ -71,3 +82,6 @@
 </body>
 
 </html>
+
+<!-- Session unsent -->
+<?php unset($_SESSION['success']) ?>
